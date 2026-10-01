@@ -1,1 +1,41 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+  /* Display face for the wordmark. Space Grotesk has no Sinhala or Tamil glyphs, so the
+     Noto fallbacks are what actually render those scripts. */
+  --font-display: "Space Grotesk", "Noto Sans Sinhala", "Noto Sans Tamil", "Inter", system-ui,
+    sans-serif;
+
+  /* Body copy switches to a script-matched face when Sinhala or Tamil is selected. */
+  --font-latin: "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-si: "Noto Sans Sinhala", "Inter", system-ui, sans-serif;
+  --font-ta: "Noto Sans Tamil", "Inter", system-ui, sans-serif;
+}
+
+/** Applied via `lang` on <html>, so script-appropriate glyphs load automatically. */
+html[lang="si"] body {
+  font-family: var(--font-si);
+}
+
+html[lang="ta"] body {
+  font-family: var(--font-ta);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-slate-100);
+  color: var(--color-slate-900);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Keep numbers readable in tables and cards. */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
