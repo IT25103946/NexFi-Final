@@ -19,8 +19,8 @@ public record OnboardingRequest(
         String shopName,
 
         @NotBlank(message = "Business type is required")
-        @Pattern(regexp = "RETAIL|WHOLESALE|SERVICE|ECOMMERCE|OTHER",
-                message = "Business type must be RETAIL, WHOLESALE, SERVICE, ECOMMERCE or OTHER")
+        @Pattern(regexp = "RETAIL|WHOLESALE|SERVICE|GROCERY|OTHER",
+                message = "Business type must be RETAIL, WHOLESALE, SERVICE, GROCERY or OTHER")
         String businessType,
 
         @NotBlank(message = "Location is required")

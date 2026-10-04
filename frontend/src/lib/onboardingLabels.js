@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Onboarding wizard labels with complete translations for English, Sinhala (සිංහල), and Tamil (தமிழ்).
  * Covers all questionnaire steps, questions, options, placeholders, hints, and validation errors.
  */
@@ -10,7 +10,7 @@ export const LANGUAGES = [
 ]
 
 /** Stable API keys matching backend enums and requests */
-export const BUSINESS_TYPES = ['RETAIL', 'WHOLESALE', 'SERVICE', 'ECOMMERCE', 'OTHER']
+export const BUSINESS_TYPES = ['RETAIL', 'WHOLESALE', 'SERVICE', 'GROCERY', 'OTHER']
 export const CURRENCIES = ['LKR', 'USD', 'INR']
 export const BALANCE_PERIODS = ['DAILY', 'MONTHLY']
 export const RECURRING_FREQUENCIES = ['WEEKLY', 'MONTHLY']
@@ -59,7 +59,7 @@ const en = {
     RETAIL: 'Retail',
     WHOLESALE: 'Wholesale',
     SERVICE: 'Service',
-    ECOMMERCE: 'E-commerce',
+    GROCERY: 'Grocery',
     OTHER: 'Other',
     LKR: 'Sri Lankan Rupee (LKR)',
     USD: 'US Dollar (USD)',
@@ -75,7 +75,7 @@ const en = {
     RETAIL: 'Selling goods directly to retail consumers',
     WHOLESALE: 'Supplying bulk products to other shops',
     SERVICE: 'Providing professional, repair, or hospitality services',
-    ECOMMERCE: 'Online store, deliveries, and digital sales',
+    GROCERY: 'Grocery stores, supermarkets, and food shops',
     OTHER: 'Hybrid or specialized local business',
     WEEKLY: 'Settled every week or fortnightly',
     MONTHLY: 'Monthly rent, utilities, and wages',
@@ -145,7 +145,7 @@ const si = {
     RETAIL: 'සිල්ලර වෙළඳාම (Retail)',
     WHOLESALE: 'තොග වෙළඳාම (Wholesale)',
     SERVICE: 'සේවා සැපයීම (Service)',
-    ECOMMERCE: 'අන්තර්ජාල වෙළඳාම (E-commerce)',
+    GROCERY: 'අන්තර්ජාල වෙළඳාම (Grocery)',
     OTHER: 'වෙනත් (Other)',
     LKR: 'ශ්‍රී ලංකා රුපියල් (LKR)',
     USD: 'ඇමරිකානු ඩොලර් (USD)',
@@ -162,7 +162,7 @@ const si = {
     WHOLESALE: 'වෙනත් කඩ සාප්පුවලට තොග වශයෙන් සැපයීම',
     SERVICE: 'වෘත්තීය, අලුත්වැඩියා හෝ සේවා සැපයීම',
     ECOMMERCE: 'ඔන්ලයින් වෙබ් අඩවි හෝ ඩිලිවරි හරහා අලෙවිය',
-    OTHER: 'විශේෂිත හෝ ඒකාබද්ධ ව්‍යාපාර කටයුතු',
+    GROCERY: '???????? ???????, ???????????, ??? ????? ??????',
     WEEKLY: 'සෑම සතියකට වරක් ගෙවීම් සිදුවේ',
     MONTHLY: 'මාසික කුලී, බිල්පත් සහ වැටුප්',
     DAILY: 'දෛනික පදනමෙන් මුදල් ශේෂය',
@@ -231,9 +231,9 @@ const ta = {
     RETAIL: 'சில்லறை விற்பனை (Retail)',
     WHOLESALE: 'மொத்த விற்பனை (Wholesale)',
     SERVICE: 'சேவை வழங்குதல் (Service)',
-    ECOMMERCE: 'இணைய வணிகம் (E-commerce)',
-    OTHER: 'மற்றவை (Other)',
-    LKR: 'இலங்கை ரூபாய் (LKR)',
+    GROCERY: 'இணைய வணிகம் (Grocery)',
+    GROCERY: '???? ?????? (Grocery)',
+    OTHER: '???????? (Other)',
     USD: 'அமெரிக்க டாலர் (USD)',
     INR: 'இந்திய ரூபாய் (INR)',
     DAILY: 'தினசரி (Daily)',
@@ -247,8 +247,8 @@ const ta = {
     RETAIL: 'வாடிக்கையாளர்களுக்கு நேரடியாக பொருட்களை விற்றல்',
     WHOLESALE: 'பிற கடைகளுக்கு மொத்தமாக பொருட்களை விநியோகித்தல்',
     SERVICE: 'தொழில்முறை, பழுதுபார்த்தல் அல்லது விருந்தோம்பல் சேவை',
-    ECOMMERCE: 'இணைய கடை மற்றும் விநியோக விற்பனை',
-    OTHER: 'கலப்பு அல்லது பிற உள்ளூர் வணிகம்',
+    GROCERY: 'இணைய கடை மற்றும் விநியோக விற்பனை',
+    GROCERY: '????? ??????????, ????????????, ??? ????? ???????',
     WEEKLY: 'ஒவ்வொரு வாரமும் அல்லது இரு வாரத்திற்கு ஒருமுறை',
     MONTHLY: 'மாதாந்திர வாடகை, மின்கட்டணம் மற்றும் சம்பளம்',
     DAILY: 'தினசரி கணக்கிடப்படும் இருப்பு',
