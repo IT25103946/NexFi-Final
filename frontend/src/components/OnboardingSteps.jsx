@@ -1,13 +1,10 @@
 import {
   Banknote,
   Building2,
-  Calendar,
-  CreditCard,
   HandCoins,
   Landmark,
   MapPin,
   Phone,
-  Receipt,
   Repeat,
   ShoppingCart,
   Store,
@@ -24,7 +21,7 @@ import {
   RECURRING_FREQUENCIES,
 } from '../lib/onboardingLabels'
 import { formatNationalPhone } from '../hooks/useOnboardingForm'
-import { MoneyField, OptionCards, SelectField, TextField } from './OnboardingFields'
+import { MoneyField, OptionCards, TextField } from './OnboardingFields'
 
 /**
  * Language switcher displayed prominently in the questionnaire header.
@@ -221,7 +218,7 @@ export function StepFinancial({ values, errors, labels, setField }) {
             name="onboarding-balance-period"
             legend={
               <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-600">
-                <Calendar className="h-3.5 w-3.5 text-slate-500" />
+                <Wallet className="h-3.5 w-3.5 text-slate-500" />
                 {labels.financial.balancePeriod}
               </span>
             }

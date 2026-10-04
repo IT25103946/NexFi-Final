@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Sun, Moon, SunMedium, Lock, Phone, Globe, Eye, EyeOff, Check } from 'lucide-react'
+import { Sun, Moon, SunMedium, Lock, Phone, Globe, Eye, EyeOff, TrendingUp, Sparkles, Check } from 'lucide-react'
+import NexfiLogo from './NexfiLogo'
 
 const translations = {
   en: {
@@ -107,10 +108,7 @@ const LANGUAGE_OPTIONS = [
   { code: 'ta', label: 'தமிழ்' },
 ]
 
-const INPUT_BASE =
-  'w-full rounded-xl border bg-white px-3.5 py-3 text-sm text-slate-900 outline-none transition-all placeholder:text-slate-400 focus:ring-2'
-const INPUT_OK = 'border-slate-300 focus:border-emerald-600 focus:ring-emerald-100'
-const INPUT_ERR = 'border-rose-400 focus:border-rose-500 focus:ring-rose-100'
+
 
 export default function WelcomeLoginScreen({ onLogin }) {
   const [hour, setHour] = useState(() => new Date().getHours())
@@ -182,32 +180,110 @@ export default function WelcomeLoginScreen({ onLogin }) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-700 via-emerald-800 to-teal-900">
-      <div className="relative mx-auto grid min-h-screen w-full max-w-6xl lg:grid-cols-2">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-white/10 blur-3xl"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-emerald-400/10 blur-3xl"
-        />
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+        <div className="relative mx-auto grid min-h-screen w-full max-w-6xl lg:grid-cols-2">
+          <div aria-hidden="true" className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-emerald-500/20 blur-3xl animate-pulse" />
+          <div aria-hidden="true" className="pointer-events-none absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-cyan-500/15 blur-3xl animate-pulse delay-1000" />
+          <div aria-hidden="true" className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-emerald-500/10 blur-3xl animate-pulse delay-500" />
 
-        <section className="relative flex flex-col justify-between px-6 py-8 sm:px-10 lg:py-12">
-          <div>
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <span className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-white/15 text-white backdrop-blur">
-                  <SunMedium className="h-5 w-5" />
-                  <span className="absolute -right-0.5 -bottom-0.5 h-2.5 w-2.5 rounded-full bg-emerald-300 ring-2 ring-emerald-800" />
-                </span>
-                <div>
-                  <p className="font-display text-xl font-bold tracking-[0.18em] text-white">
-                    {t.brand}
-                  </p>
-                  <p className="mt-0.5 text-[11px] text-emerald-100/80">{t.tagline}</p>
+          <section className="relative flex flex-col justify-between px-6 py-8 sm:px-10 lg:py-12">
+            <div>
+              <div className="flex items-center justify-between gap-3">
+                <NexfiLogo size="lg" className="mt-2" />
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setLanguageOpen((open) => !open)}
+                    aria-haspopup="listbox"
+                    aria-expanded={languageOpen}
+                    aria-label={t.language}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-slate-900/80 px-3 py-1.5 text-xs font-semibold text-slate-200 shadow-2xl shadow-emerald-500/10 backdrop-blur-xl transition-all duration-300 hover:bg-slate-800/80 hover:text-white hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+                  >
+                    <Globe className="h-3.5 w-3.5 text-emerald-300" />
+                    {LANGUAGE_OPTIONS.find((option) => option.code === language)?.label || 'English'}
+                  </button>
+
+                  {languageOpen ? (
+                    <>
+                      <div
+                        className="fixed inset-0 z-10"
+                        onClick={() => setLanguageOpen(false)}
+                        aria-hidden="true"
+                      />
+                      <ul
+                        role="listbox"
+                        aria-label={t.language}
+                        className="absolute right-0 z-20 mt-2 w-40 overflow-hidden rounded-xl border border-white/10 bg-slate-900/90 py-1 shadow-2xl shadow-emerald-500/10 backdrop-blur-xl"
+                      >
+                        {LANGUAGE_OPTIONS.map((option) => (
+                          <li key={option.code}>
+                            <button
+                              type="button"
+                              role="option"
+                              aria-selected={option.code === language}
+                              onClick={() => {
+                                setLanguage(option.code)
+                                setLanguageOpen(false)
+                              }}
+                              className={`w-full px-3 py-1.5 text-left text-xs font-medium transition-colors ${
+                                option.code === language
+                                  ? 'bg-gradient-to-r from-emerald-600/20 to-teal-600/20 text-emerald-200'
+                                  : 'text-slate-300 hover:bg-white/10 hover:text-white'
+                              }`}
+                            >
+                              {option.label}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  ) : null}
                 </div>
               </div>
+              <div className="mt-10 space-y-3">
+                <div className="flex items-start gap-3">
+                  <span className="mt-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 text-emerald-300 border border-emerald-400/30 backdrop-blur-sm shadow-lg shadow-emerald-500/20">
+                    <GreetingIcon className="h-6 w-6" />
+                  </span>
+                  <div>
+                    <p className="tabular text-sm font-medium text-emerald-300">{clock}</p>
+                    <h1 className="mt-0.5 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                      {t[greetingKey]}
+                    </h1>
+                    <p className="mt-1 max-w-md text-sm leading-relaxed text-slate-300">
+                      {t.subtitle}
+                    </p>
+                  </div>
+                </div>
+                <ul className="mt-6 grid gap-3 sm:grid-cols-3">
+                  {t.highlights.map((item, index) => (
+                    <li key={index} className="rounded-xl border border-white/10 bg-slate-900/60 p-3 backdrop-blur-md shadow-lg shadow-slate-900/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-emerald-500/20">
+                      <TrendingUp className="h-4 w-4 text-emerald-300" aria-hidden="true" />
+                      <p className="mt-1.5 text-sm font-semibold text-white">{item.title}</p>
+                      <p className="mt-0.5 text-xs leading-relaxed text-slate-400">{item.detail}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <p className="mt-10 hidden text-sm font-medium text-slate-400 lg:block">
+              Privacy first A� NEXFI
+            </p>
+          </section>
+
+          <section className="relative flex items-center justify-center px-4 py-8 sm:px-8 lg:py-12">
+            <div className="w-full max-w-md">
+              <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-6 shadow-2xl shadow-emerald-500/10 backdrop-blur-xl sm:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-emerald-500/20">
+                <div className="text-center">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-900/40 px-2.5 py-1 text-xs font-semibold text-emerald-200 backdrop-blur-sm">
+                    <Sparkles className="h-3.5 w-3.5" />
+                    Cash-flow early warning
+                  </span>
+                  <h2 className="mt-4 font-display text-2xl font-bold tracking-tight text-white">
+                    {t.loginTitle}
+                  </h2>
+                  <p className="mt-1 text-sm text-slate-400">{t.loginSubtitle}</p>
+                </div>
 
               <div className="relative">
                 <button
@@ -319,11 +395,11 @@ export default function WelcomeLoginScreen({ onLogin }) {
 
               <form onSubmit={handleSubmit} noValidate className="mt-5 space-y-4">
                 <div>
-                  <label htmlFor="mobile" className="text-sm font-medium text-slate-700">
+                    <label htmlFor="mobile" className="text-sm font-medium text-slate-300">
                     {t.mobile}
                   </label>
                   <div className="mt-1.5 flex">
-                    <span className="inline-flex items-center gap-1 rounded-l-xl border border-r-0 border-slate-300 bg-slate-50 px-3 text-sm font-semibold text-slate-600">
+                    <span className="inline-flex items-center gap-1 rounded-l-xl border border-r-0 border-white/10 bg-slate-800/60 px-3 text-sm font-semibold text-slate-300 backdrop-blur-sm">
                       <Phone className="h-3.5 w-3.5" />
                       +94
                     </span>
@@ -341,7 +417,7 @@ export default function WelcomeLoginScreen({ onLogin }) {
                       placeholder={t.mobilePlaceholder}
                       aria-invalid={errors.mobile ? 'true' : undefined}
                       aria-describedby={errors.mobile ? 'mobile-error' : undefined}
-                      className={`${INPUT_BASE} rounded-l-none ${errors.mobile ? INPUT_ERR : INPUT_OK}`}
+                      className={`w-full rounded-r-xl border bg-slate-800/60 px-3.5 py-3 text-sm text-white outline-none transition-all duration-300 placeholder:text-slate-500 focus:ring-2 backdrop-blur-sm ${errors.mobile ? 'border-rose-400/50 focus:border-rose-400 focus:ring-rose-500/20' : 'border-white/10 focus:border-emerald-500 focus:ring-emerald-500/20'}`}
                     />
                   </div>
                   {errors.mobile ? (
@@ -352,11 +428,11 @@ export default function WelcomeLoginScreen({ onLogin }) {
                 </div>
 
                 <div>
-                  <label htmlFor="password" className="text-sm font-medium text-slate-700">
+                  <label htmlFor="password" className="text-sm font-medium text-slate-300">
                     {t.password}
                   </label>
                   <div className="relative mt-1.5">
-                    <Lock className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                    <Lock className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-500" />
                     <input
                       id="password"
                       name="password"
@@ -369,14 +445,14 @@ export default function WelcomeLoginScreen({ onLogin }) {
                       }}
                       aria-invalid={errors.password ? 'true' : undefined}
                       aria-describedby={errors.password ? 'password-error' : undefined}
-                      className={`${INPUT_BASE} pl-9 pr-11 ${errors.password ? INPUT_ERR : INPUT_OK}`}
+                      className={`w-full rounded-xl border bg-slate-800/60 pl-9 pr-11 py-3 text-sm text-white outline-none transition-all duration-300 placeholder:text-slate-500 focus:ring-2 backdrop-blur-sm ${errors.password ? 'border-rose-400/50 focus:border-rose-400 focus:ring-rose-500/20' : 'border-white/10 focus:border-emerald-500 focus:ring-emerald-500/20'}`}
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword((visible) => !visible)}
                       aria-label={showPassword ? t.hidePassword : t.showPassword}
                       aria-pressed={showPassword}
-                      className="absolute top-1/2 right-2 -translate-y-1/2 rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600"
+                      className="absolute top-1/2 right-2 -translate-y-1/2 rounded-lg p-2 text-slate-400 transition-all duration-300 hover:bg-white/10 hover:text-white"
                     >
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
@@ -393,19 +469,19 @@ export default function WelcomeLoginScreen({ onLogin }) {
                 </div>
 
                 <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
-                  <label className="flex cursor-pointer items-center gap-2 text-sm text-slate-600">
+                  <label className="flex cursor-pointer items-center gap-2 text-sm text-slate-300">
                     <input
                       type="checkbox"
                       checked={rememberMe}
                       onChange={(event) => setRememberMe(event.target.checked)}
-                      className="h-4 w-4 rounded border-slate-300 text-emerald-700 focus:ring-emerald-500"
+                      className="h-4 w-4 rounded border-white/20 bg-slate-800/60 text-emerald-600 focus:ring-emerald-500 focus:ring-offset-0"
                     />
                     {t.rememberMe}
                   </label>
 
                   <button
                     type="button"
-                    className="text-sm font-medium text-emerald-700 transition-colors hover:text-emerald-800"
+                    className="text-sm font-medium text-emerald-300 transition-colors hover:text-emerald-200"
                   >
                     {t.forgotPassword}
                   </button>
@@ -413,16 +489,16 @@ export default function WelcomeLoginScreen({ onLogin }) {
 
                 <button
                   type="submit"
-                  className="font-display w-full rounded-xl bg-emerald-700 px-4 py-3 text-sm font-semibold tracking-wide text-white shadow-sm transition-colors hover:bg-emerald-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+                  className="font-display w-full rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 px-4 py-3 text-sm font-semibold tracking-wide text-white shadow-lg shadow-emerald-500/30 transition-all duration-300 hover:from-emerald-700 hover:to-teal-700 hover:-translate-y-0.5 hover:shadow-emerald-500/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
                 >
                   {t.submit}
                 </button>
 
-                <div className="flex items-center justify-center gap-2 pt-1 text-sm text-slate-600">
+                <div className="flex items-center justify-center gap-2 pt-1 text-sm text-slate-400">
                   <span>{t.noAccount}</span>
                   <Link
                     to="/onboarding"
-                    className="font-semibold text-emerald-700 transition-colors hover:text-emerald-800"
+                    className="font-semibold text-emerald-300 transition-colors hover:text-emerald-200"
                   >
                     {t.register}
                   </Link>

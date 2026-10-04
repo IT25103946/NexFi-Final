@@ -4,12 +4,12 @@ import {
   ArrowUpRight,
   Banknote,
   Building2,
-  Calendar,
+
   CheckCircle2,
   Compass,
-  CreditCard,
+
   Edit3,
-  HelpCircle,
+
   MapPin,
   Phone,
   Plus,

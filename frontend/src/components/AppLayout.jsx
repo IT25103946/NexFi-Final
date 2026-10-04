@@ -1,14 +1,15 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import Icon from './Icon'
+import NexfiLogo from './NexfiLogo'
 import { useSession } from '../auth/sessionContext'
 import { getTranslator } from '../lib/i18n'
 
 function linkClasses(isActive) {
   const base =
-    'flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-semibold transition-colors duration-150 no-underline'
+    'flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-semibold transition-all duration-300 no-underline group hover:-translate-y-0.5'
   return isActive
-    ? `${base} bg-emerald-700 text-white shadow-sm shadow-emerald-700/20`
-    : `${base} text-slate-600 hover:bg-slate-100 hover:text-slate-900`
+    ? `${base} bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/30 border border-white/10 backdrop-blur-sm`
+    : `${base} text-slate-300 hover:bg-white/10 hover:text-white hover:shadow-lg hover:shadow-emerald-500/20 border border-transparent hover:border-white/10 backdrop-blur-sm`
 }
 
 export default function AppLayout({ children }) {
@@ -26,12 +27,19 @@ export default function AppLayout({ children }) {
   ]
 
   return (
-    <div className="min-h-screen bg-slate-100 pb-20 lg:pb-0">
-      <div className="mx-auto flex w-full max-w-7xl gap-8 px-4 sm:px-6 lg:px-8">
-        <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-slate-200 bg-white py-6 lg:flex">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pb-20 lg:pb-0">
+      {/* Animated background elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-3xl animate-pulse delay-500" />
+      </div>
+
+      <div className="relative mx-auto flex w-full max-w-7xl gap-8 px-4 sm:px-6 lg:px-8">
+        <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-white/10 bg-slate-900/80 backdrop-blur-xl py-6 lg:flex shadow-2xl shadow-emerald-500/10">
           <div className="px-4">
-            <p className="font-display text-2xl font-bold tracking-tight text-slate-900">NexFi</p>
-            <p className="text-xs font-medium text-slate-500">{t('nav.tagline')}</p>
+            <NexfiLogo size="md" />
+            <p className="mt-2 text-xs font-medium text-slate-400">{t('nav.tagline')}</p>
           </div>
           <nav className="mt-6 flex flex-col gap-1.5 px-3">
             {links.map((link) => (
@@ -47,7 +55,7 @@ export default function AppLayout({ children }) {
             ))}
           </nav>
           <div className="mt-auto px-4">
-            <p className="rounded-xl border border-slate-200 bg-slate-50/80 p-3 text-[11px] leading-relaxed text-slate-500">
+            <p className="rounded-xl border border-white/10 bg-slate-800/60 backdrop-blur-md p-3 text-[11px] leading-relaxed text-slate-400 shadow-lg">
               {t('nav.demoNotice')}
             </p>
           </div>
@@ -56,15 +64,17 @@ export default function AppLayout({ children }) {
         <main className="min-w-0 flex-1 py-6">{children ?? <Outlet />}</main>
       </div>
 
-      <nav className="fixed inset-x-0 bottom-0 z-20 flex items-stretch gap-1 overflow-x-auto border-t border-slate-200 bg-white px-2 py-1.5 shadow-lg lg:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-20 flex items-stretch gap-1 overflow-x-auto border-t border-white/10 bg-slate-900/90 backdrop-blur-xl px-2 py-1.5 shadow-2xl shadow-emerald-500/10 lg:hidden">
         {links.map((link) => (
           <NavLink
             key={link.to}
             to={link.to}
             end={link.end}
             className={({ isActive }) =>
-              `flex min-w-16 flex-1 flex-col items-center gap-1 rounded-lg px-1 py-1.5 text-[11px] font-medium no-underline ${
-                isActive ? 'bg-emerald-50 text-emerald-800' : 'text-slate-500'
+              `flex min-w-16 flex-1 flex-col items-center gap-1 rounded-lg px-1 py-1.5 text-[11px] font-medium no-underline transition-all duration-300 hover:-translate-y-0.5 ${
+                isActive
+                  ? 'bg-gradient-to-t from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/30'
+                  : 'text-slate-400 hover:bg-white/10 hover:text-white'
               }`
             }
           >

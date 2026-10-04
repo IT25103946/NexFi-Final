@@ -4,6 +4,7 @@ import { ArrowLeft } from 'lucide-react'
 
 import OnboardingWizard from '../components/OnboardingWizard'
 import { ErrorBanner } from '../components/Feedback'
+import NexfiLogo from '../components/NexfiLogo'
 import { useSession } from '../auth/sessionContext'
 import { stripCountryCode } from '../hooks/useOnboardingForm'
 import { submitOnboarding } from '../api/client'
@@ -51,32 +52,46 @@ export default function Onboarding() {
       : undefined
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-50 via-slate-50 to-slate-100 px-4 py-8 sm:px-6 sm:py-12">
-      {profile ? (
-        <div className="mx-auto mb-4 max-w-2xl flex items-center justify-between">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-sm font-medium text-emerald-800 hover:text-emerald-950 transition-colors"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Dashboard
-          </Link>
-          <span className="text-xs font-semibold uppercase tracking-wider text-emerald-700 bg-emerald-100/70 px-2.5 py-1 rounded-full">
-            Edit Shop Setup
-          </span>
-        </div>
-      ) : null}
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 px-4 py-8 sm:px-6 sm:py-12">
+      {/* Animated background */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/3 left-2/3 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl animate-pulse delay-500" />
+      </div>
 
-      {error ? (
-        <div className="mx-auto mb-4 max-w-2xl">
-          <ErrorBanner message={error} />
-        </div>
-      ) : null}
+      <div className="relative">
+        {profile ? (
+          <div className="mx-auto mb-4 max-w-2xl flex items-center justify-between">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 text-sm font-medium text-emerald-300 hover:text-emerald-200 transition-colors"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Back to Dashboard
+            </Link>
+            <span className="text-xs font-semibold uppercase tracking-wider text-emerald-200 bg-gradient-to-r from-emerald-900/80 to-teal-900/80 border border-emerald-400/30 px-2.5 py-1 rounded-full backdrop-blur-sm shadow-lg shadow-emerald-500/20">
+              Edit Shop Setup
+            </span>
+          </div>
+        ) : (
+          <div className="mx-auto mb-6 max-w-2xl flex flex-col items-center gap-3 text-center">
+            <NexfiLogo size="lg" />
+            <p className="text-sm text-slate-400">Cash-flow early warning for small Sri Lankan businesses</p>
+          </div>
+        )}
 
-      <OnboardingWizard
-        onComplete={handleComplete}
-        initialValues={initialValues}
-      />
+        {error ? (
+          <div className="mx-auto mb-4 max-w-2xl">
+            <ErrorBanner message={error} />
+          </div>
+        ) : null}
+
+        <OnboardingWizard
+          onComplete={handleComplete}
+          initialValues={initialValues}
+        />
+      </div>
     </div>
   )
 }

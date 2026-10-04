@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # NexFi
 
 Cash-flow early warning platform for small Sri Lankan businesses.
@@ -107,3 +108,7 @@ nexfi.timezone=Asia/Colombo    # "today" is resolved in Sri Lanka time
 
 Authentication, AI or OCR features, payment integration, database persistence and
 deployment. Data is in memory only.
+=======
+# NexFi-Final
+AI-powered cash-flow early warning and forecasting web app for small Sri Lankan businesses
+>>>>>>> 4363d3666cd334409a2034ddf4bceb0a5e8bfd3b
