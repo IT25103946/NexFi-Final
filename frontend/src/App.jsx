@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 export default function App() {
-  const [currentStep, setCurrentStep] = useState('auth'); // 'auth' | 'onboarding' | 'dashboard'
-  const [activeTab, setActiveTab] = useState('signin');
+  const [currentStep, setCurrentStep] = useState('auth'); // 'auth' | 'dashboard'
+  const [activeTab, setActiveTab] = useState('signin'); // 'signin' | 'create'
   const [selectedLang, setSelectedLang] = useState('English'); // 'English' | 'தமிழ்' | 'සිංහල'
   const [isLangOpen, setIsLangOpen] = useState(false);
 
@@ -19,13 +19,6 @@ export default function App() {
       ownerName: 'Owner Full Name',
       whatsapp: 'WhatsApp Number',
       password: 'Password',
-      next: 'Next →',
-      prev: '← Previous',
-      configure: 'Configure',
-      category: 'Business Category',
-      currency: 'Default Currency',
-      district: 'District / City',
-      dailyTarget: 'Daily Sales Target (LKR)',
       tagline: 'KNOW YOUR CASH FLOW • GROW YOUR BUSINESS',
       todaysSales: "Today's Sales",
       totalOrders: 'Total Orders',
@@ -43,13 +36,6 @@ export default function App() {
       ownerName: 'உரிமையாளரின் முழுப் பெயர்',
       whatsapp: 'வாட்ஸ்அப் எண்',
       password: 'கடவுச்சொல்',
-      next: 'அடுத்தது →',
-      prev: '← முந்தையது',
-      configure: 'அமைக்கவும்',
-      category: 'வணிக வகை',
-      currency: 'நாணயம்',
-      district: 'மாவட்டம் / நகரம்',
-      dailyTarget: 'தினசரி விற்பனை இலக்கு (LKR)',
       tagline: 'பணப்புழக்கத்தை அறிவோம் • வணிகத்தை வளர்ப்போம்',
       todaysSales: 'இன்றைய விற்பனை',
       totalOrders: 'மொத்த ஆர்டர்கள்',
@@ -67,13 +53,6 @@ export default function App() {
       ownerName: 'හිමිකරුගේ සම්පූර්ණ නම',
       whatsapp: 'වට්ස්ඇප් අංකය',
       password: 'මුරපදය',
-      next: 'ඊළඟ →',
-      prev: '← පෙර',
-      configure: 'සංින්‍යාස කරන්න',
-      category: 'ව්‍යාපාරික වර්ගය',
-      currency: 'මුදල් වර්ගය',
-      district: 'දිස්ත්‍රික්කය / නගරය',
-      dailyTarget: 'දෛනික විකුණුම් ඉලක්කය (LKR)',
       tagline: 'මුදල් ප්‍රවාහය දැනගන්න • ව්‍යාපාරය වර්ධනය කරන්න',
       todaysSales: 'අද දින විකුණුම්',
       totalOrders: 'මුළු ඇණවුම්',
@@ -91,20 +70,23 @@ export default function App() {
     ownerName: 'Mala',
     whatsapp: '7712134565',
     password: '••••••••',
-    shopCategory: 'Retail Grocery',
-    currency: 'LKR (Rs)',
-    district: 'Colombo',
-    dailyTarget: '25000'
+    shopCategory: 'Retail Grocery'
   });
+
+  const handleSignInSubmit = (e) => {
+    e.preventDefault();
+    setCurrentStep('dashboard');
+  };
 
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
-    setCurrentStep('onboarding');
+    setCurrentStep('dashboard');
   };
 
-  const handleOnboardingSubmit = (e) => {
-    e.preventDefault();
-    setCurrentStep('dashboard');
+  // LOGOUT FUNCTION - Resets back to Auth Page
+  const handleLogout = () => {
+    setCurrentStep('auth');
+    setActiveTab('signin');
   };
 
   return (
@@ -221,7 +203,7 @@ export default function App() {
         /* BIGGER & CENTERED HERO BRAND TITLE */
         .hero-brand-section {
           text-align: center;
-          margin: 30px 0 20px 0;
+          margin: 25px 0 15px 0;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -319,7 +301,7 @@ export default function App() {
           border: 1px solid transparent;
         }
 
-        .neo-input-box input, .neo-input-box select {
+        .neo-input-box input {
           width: 100%;
           background: transparent;
           border: none;
@@ -329,11 +311,6 @@ export default function App() {
           font-size: 13px;
         }
 
-        .neo-input-box select option {
-          background: #141824;
-          color: #f1f5f9;
-        }
-
         .phone-prefix {
           font-size: 13px;
           font-weight: 700;
@@ -341,34 +318,16 @@ export default function App() {
           margin-right: 10px;
         }
 
-        /* NAVIGATION BUTTONS */
-        .nav-btn-group {
-          display: flex;
-          gap: 12px;
+        /* SINGLE FULL WIDTH SUBMIT BUTTON */
+        .btn-neo-submit {
+          width: 100%;
+          padding: 14px;
           margin-top: 16px;
-        }
-
-        .btn-neo-prev {
-          flex: 1;
-          padding: 12px;
-          background: #141824;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 14px;
-          color: #94a3b8;
-          font-size: 12px;
-          font-weight: 700;
-          cursor: pointer;
-          box-shadow: 4px 4px 10px #0b0d14, -4px -4px 10px #1d2334;
-        }
-
-        .btn-neo-next {
-          flex: 1;
-          padding: 12px;
           background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
           border: none;
           border-radius: 14px;
           color: #ffffff;
-          font-size: 12px;
+          font-size: 13px;
           font-weight: 700;
           cursor: pointer;
           box-shadow: 
@@ -377,18 +336,36 @@ export default function App() {
             0 0 15px rgba(56, 189, 248, 0.3);
         }
 
+        .btn-neo-logout {
+          width: 100%;
+          padding: 14px;
+          margin-top: 20px;
+          background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+          border: none;
+          border-radius: 14px;
+          color: #ffffff;
+          font-size: 13px;
+          font-weight: 700;
+          cursor: pointer;
+          box-shadow: 
+            6px 6px 16px #0b0d14, 
+            -6px -6px 16px #1d2334,
+            0 0 15px rgba(239, 68, 68, 0.3);
+        }
+
         /* DASHBOARD STYLES */
         .dash-card-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 10px;
+          gap: 12px;
+          margin-top: 16px;
           margin-bottom: 14px;
         }
 
         .dash-metric-box {
           background: #141824;
-          padding: 12px;
-          border-radius: 16px;
+          padding: 14px;
+          border-radius: 18px;
           box-shadow: 5px 5px 12px #0b0d14, -5px -5px 12px #1d2334;
         }
 
@@ -399,10 +376,10 @@ export default function App() {
         }
 
         .metric-val {
-          font-size: 15px;
+          font-size: 16px;
           font-weight: 700;
           color: #38bdf8;
-          margin-top: 4px;
+          margin-top: 6px;
         }
 
         .bottom-tagline {
@@ -461,7 +438,7 @@ export default function App() {
             </div>
           </header>
 
-          {/* HERO NEXFI TITLE BANNER (CENTERED & LARGER) */}
+          {/* HERO NEXFI TITLE BANNER */}
           <div className="hero-brand-section">
             <h1 className="hero-brand-title">NEXFI</h1>
             <p className="hero-brand-subtitle">{t.subtitle}</p>
@@ -486,28 +463,23 @@ export default function App() {
                 </div>
 
                 {activeTab === 'signin' ? (
-                    <form onSubmit={() => setCurrentStep('dashboard')}>
+                    <form onSubmit={handleSignInSubmit}>
                       <div className="input-group">
                         <label>{t.usernameOrEmail}</label>
                         <div className="neo-input-box">
-                          <input type="text" defaultValue="mala_stores" />
+                          <input type="text" defaultValue="mala_stores" required />
                         </div>
                       </div>
                       <div className="input-group">
                         <label>{t.password}</label>
                         <div className="neo-input-box">
-                          <input type="password" defaultValue="••••••••" />
+                          <input type="password" defaultValue="••••••••" required />
                         </div>
                       </div>
 
-                      <div className="nav-btn-group">
-                        <button type="button" className="btn-neo-prev" onClick={() => setActiveTab('create')}>
-                          {t.prev}
-                        </button>
-                        <button type="submit" className="btn-neo-next">
-                          {t.next}
-                        </button>
-                      </div>
+                      <button type="submit" className="btn-neo-submit">
+                        {t.signIn}
+                      </button>
                     </form>
                 ) : (
                     <form onSubmit={handleRegisterSubmit}>
@@ -572,96 +544,21 @@ export default function App() {
                         </div>
                       </div>
 
-                      <div className="nav-btn-group">
-                        <button type="button" className="btn-neo-prev" onClick={() => setActiveTab('signin')}>
-                          {t.prev}
-                        </button>
-                        <button type="submit" className="btn-neo-next">
-                          {t.next}
-                        </button>
-                      </div>
+                      <button type="submit" className="btn-neo-submit">
+                        {t.createAccount}
+                      </button>
                     </form>
                 )}
               </div>
           )}
 
-          {/* STEP 2: SHOP ONBOARDING */}
-          {currentStep === 'onboarding' && (
-              <div className="neo-card">
-                <h3 style={{ fontSize: '14px', color: '#38bdf8', marginBottom: '12px', textAlign: 'center' }}>
-                  {t.configure} {formData.shopName}
-                </h3>
-
-                <form onSubmit={handleOnboardingSubmit}>
-                  <div className="input-group">
-                    <label>{t.category}</label>
-                    <div className="neo-input-box">
-                      <select
-                          value={formData.shopCategory}
-                          onChange={(e) => setFormData({...formData, shopCategory: e.target.value})}
-                      >
-                        <option value="Retail Grocery">Retail Grocery / Supermarket</option>
-                        <option value="Textile & Fashion">Textile & Fashion</option>
-                        <option value="Electronics & Mobiles">Electronics & Mobiles</option>
-                        <option value="Pharmacy & Healthcare">Pharmacy & Healthcare</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="input-group">
-                    <label>{t.currency}</label>
-                    <div className="neo-input-box">
-                      <select
-                          value={formData.currency}
-                          onChange={(e) => setFormData({...formData, currency: e.target.value})}
-                      >
-                        <option value="LKR (Rs)">Sri Lankan Rupee (LKR)</option>
-                        <option value="USD ($)">US Dollar ($)</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="input-group">
-                    <label>{t.district}</label>
-                    <div className="neo-input-box">
-                      <input
-                          type="text"
-                          value={formData.district}
-                          onChange={(e) => setFormData({...formData, district: e.target.value})}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="input-group">
-                    <label>{t.dailyTarget}</label>
-                    <div className="neo-input-box">
-                      <input
-                          type="number"
-                          value={formData.dailyTarget}
-                          onChange={(e) => setFormData({...formData, dailyTarget: e.target.value})}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="nav-btn-group">
-                    <button type="button" className="btn-neo-prev" onClick={() => setCurrentStep('auth')}>
-                      {t.prev}
-                    </button>
-                    <button type="submit" className="btn-neo-next">
-                      {t.next}
-                    </button>
-                  </div>
-                </form>
-              </div>
-          )}
-
-          {/* STEP 3: DASHBOARD */}
+          {/* STEP 2: DIRECT DASHBOARD DETAILS */}
           {currentStep === 'dashboard' && (
               <div className="neo-card" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
                     <div>
-                      <h3 style={{ fontSize: '15px', color: '#f8fafc' }}>{formData.shopName}</h3>
+                      <h3 style={{ fontSize: '16px', color: '#f8fafc' }}>{formData.shopName}</h3>
                       <span style={{ fontSize: '11px', color: '#38bdf8' }}>@{formData.username} • {formData.shopCategory}</span>
                     </div>
                   </div>
@@ -682,14 +579,9 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="nav-btn-group">
-                  <button type="button" className="btn-neo-prev" onClick={() => setCurrentStep('onboarding')}>
-                    {t.prev}
-                  </button>
-                  <button type="button" className="btn-neo-next" onClick={() => setCurrentStep('auth')}>
-                    {t.logout}
-                  </button>
-                </div>
+                <button type="button" className="btn-neo-logout" onClick={handleLogout}>
+                  {t.logout}
+                </button>
               </div>
           )}
 
